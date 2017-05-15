@@ -7,7 +7,6 @@ const userSchema = mongoose.Schema({
 });
 
 const messageSchema = mongoose.Schema({
-    orderNumber: Number,
     fromUser: String,
     messageContent: String,
     createdAt: Date
