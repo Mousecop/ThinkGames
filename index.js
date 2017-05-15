@@ -10,6 +10,7 @@ const {User, ChatHistory, Messages} = require('./models/models');
 const DATABASE_URL = 'mongodb://localhost/thinkgames-db';
 const moment = require('moment');
 
+mongoose.Promise = global.Promise;
 
 const app = express();
 const server = http.createServer(app);
@@ -30,6 +31,53 @@ mongoose.connect(DATABASE_URL, err => {
 
 const db = mongoose.connection;
 
+
+app.get('/api/users', (req, res) => {
+    User
+        .find({})
+        .exec()
+        .then(listOfUsers => {
+            console.log('list of users:',listOfUsers)
+            res.json(listOfUsers)
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({message:'internal server error'});
+        })
+})
+
+app.get('/api/messages', (req, res) => {
+    Messages
+        .find({})
+        .sort({
+            createdAt: -1
+        })
+        .exec()
+        .then(listOfMessages => {
+            console.log('list of messages:', listOfMessages)
+            res.json(listOfMessages)
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({message:'internal server error'});
+        })
+})
+
+app.get('/api/user/:username', (req, res) => {
+    User
+        .find({
+            username: req.params.username
+        })
+        .exec()
+        .then(currentUser => {
+            res.json(currentUser)
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({message:'internal server error'});
+        })
+})
+
 //Basic user signup. TODO: add bcyrpt
 app.post('/api/users/signup', (req, res) => {
     User
@@ -47,7 +95,6 @@ app.post('/api/users/signup', (req, res) => {
             res.status(500).json({message:'internal server error'});
         })
 })
-
 
 //Creates a new message in db, and then adds to chat history array for displaying later.
 app.post('/api/new/message', (req, res) => {
@@ -91,7 +138,6 @@ app.post('/api/new/chat-history', (req, res) => {
         })
 })
 
-let counter = 0;
 //Server socketIo code
 io.on('connection', socket =>{
     console.log('user has connected on ' + socket.id);
@@ -109,7 +155,6 @@ io.on('connection', socket =>{
 
     socket.on('message', body => {
         db.collection('messages').insert({
-                orderNumber: counter++,
                 fromUser: socket.id.slice(9),
                 messageContent: body,
                 createdAt: Date.now()
