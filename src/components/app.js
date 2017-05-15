@@ -13,8 +13,9 @@ class App extends React.Component {
   componentDidMount() {
     this.socket = io('/');
     this.socket.on('message', message => {
-      this.setState({messages: [message,...this.state.messages]})
+      this.setState({messages: [...this.state.messages, message]})
     })
+
   }
 
   handleSubmit(event) {
