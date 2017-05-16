@@ -16,6 +16,10 @@ export default (state = initalState, action) => {
             return {...state, isUserLoggedIn: true}
         case actions.CURRENT_USER:
             return {...state, currentUser: action.currentUser}
+        case actions.AUTH_ERROR:
+            return {...state, errorMessage: action.error}
+        case actions.FETCH_MESSAGES_SUCCESS:
+            return {...state, messages: [...state.messages, action.messages]}
         default:
             return state
     }
