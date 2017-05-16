@@ -4,13 +4,18 @@ const initalState = {
     messages: [],
     currentUser: '',
     Users: [],
-    isUserLoggedIn: false
+    isUserLoggedIn: false,
+    errorMessage: ''
 }
 
 export default (state = initalState, action) => {
     switch(action.type) {
         case actions.FETCH_USERS_SUCCESS:
             return {...state, Users: action.users}
+        case actions.USER_LOGGED_IN:
+            return {...state, isUserLoggedIn: true}
+        case actions.CURRENT_USER:
+            return {...state, currentUser: action.currentUser}
         default:
             return state
     }
