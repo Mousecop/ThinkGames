@@ -7,9 +7,7 @@ class Signup extends React.Component {
     constructor(props) {
         super(props)
         this.handleFormSubmit = this.handleFormSubmit.bind(this)
-        // this.state = {
-        //     errorMessage: ''
-        // }
+        this.renderAlert = this.renderAlert.bind(this)
     }
 
     handleFormSubmit(e) {
@@ -42,15 +40,15 @@ class Signup extends React.Component {
     //     }
     // }
 
-    /*renderAlert() {
-        if (this.state.errorMessage !== '') {
+    renderAlert() {
+        if (this.props.errorMessage !== '') {
             return (
                 <div className="error">
-                    <strong>Oops!</strong> {this.state.errorMessage}
+                    <strong>Oops!</strong> {this.props.errorMessage}
                 </div>
             )
         }
-    }*/
+    }
 
     
 
@@ -72,7 +70,7 @@ class Signup extends React.Component {
                             <label htmlFor="password" className="passwordLabel">Password</label>
                             <input type="password" id="password" ref="password" required/>
                         </fieldset>
-                        {/*{this.renderAlert()}*/}
+                        {this.renderAlert()}
                         <button action="submit" className="signup-submit-button">Sign up!</button>
                     </form>
                 </div>
@@ -80,6 +78,10 @@ class Signup extends React.Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    errorMessage : state.errorMessage
+})
 
 const mapDispatchToProps = dispatch => ({
     userSignUp(userInfo){
@@ -90,4 +92,4 @@ const mapDispatchToProps = dispatch => ({
     }
 })
 
-export default connect(null, mapDispatchToProps)(Signup)
+export default connect(mapStateToProps, mapDispatchToProps)(Signup)
