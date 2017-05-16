@@ -17,3 +17,5 @@ yarn-error.log*
 server/secret.js
 
 ideas.txt
+
+config
