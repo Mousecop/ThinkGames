@@ -4,6 +4,7 @@ export const FETCH_MESSAGES_SUCCESS = 'FETCH_MESSAGES_SUCCESS';
 export const FETCH_CURRENT_USER_SUCCESS = 'FETCH_CURRENT_USER_SUCCESS';
 export const USER_LOGGED_IN = 'USER_LOGGED_IN';
 export const CURRENT_USER = 'CURRENT_USER';
+export const AUTH_ERROR = 'AUTH_ERROR';
 
 //List of async actions
 export const fetchListOfUsers = () => dispatch => {
@@ -19,13 +20,6 @@ export const fetchListOfUsers = () => dispatch => {
         })
 }
 
-
-//Best way to get the current user that just logged in? Necessary?
-// export const fetchCurrentUser= (username) => dispatch => {
-//     fetch('/api/user/')
-// }
-
-
 export const fetchMessages = () => dispatch => {
     fetch('/api/messages')
         .then(response => {
@@ -39,7 +33,7 @@ export const fetchMessages = () => dispatch => {
         })
 }
 
-export const signupUser = (userInfo) => dispatch => {
+export const signupUser = userInfo => dispatch => {
     console.log(userInfo)
     fetch('/api/users/signup', {
         method: 'POST',
@@ -50,11 +44,31 @@ export const signupUser = (userInfo) => dispatch => {
         body: JSON.stringify(userInfo)
     })
     .then(response => {
-        console.log(response)
+        // localStorage.setItem('token', userInfo.username)
+        dispatch(userLogin())
         return response.json()
     })
-    .then(userInfo => {
+    .catch(err => {
+        dispatch(authError(err))
+    })
+}
+
+export const signinUser = userInfo => dispatch => {
+    fetch('/api/users/signin', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(userInfo)
+    })
+    .then(response => {
         dispatch(userLogin())
+        localStorage.setItem('user', userInfo.username)
+    })
+    .catch(err => {
+        console.log('signin error:',err);
+        dispatch(authError('Bad login info'))
     })
 }
 
@@ -63,7 +77,7 @@ export const signupUser = (userInfo) => dispatch => {
 export const fetchUsersSuccess = (users) => ({
     type: FETCH_USERS_SUCCESS,
     users
-});
+})
 
 export const fetchCurrentUserSuccess = (currentUser) => ({
     type : FETCH_CURRENT_USER_SUCCESS,
@@ -82,4 +96,9 @@ export const userLogin = () => ({
 export const currentUser = (currentUser) => ({
     type: CURRENT_USER,
     currentUser
+})
+
+export const authError = (error) => ({
+    type: AUTH_ERROR,
+    error
 })
