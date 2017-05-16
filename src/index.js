@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './components/app';
 import { Provider } from 'react-redux';
 import store from './store.jsx';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, BrowserHistory } from 'react-router-dom';
 import {userLogin} from './actions/action';
 
 const user = localStorage.getItem('user');
