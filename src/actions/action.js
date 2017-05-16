@@ -5,6 +5,7 @@ export const FETCH_CURRENT_USER_SUCCESS = 'FETCH_CURRENT_USER_SUCCESS';
 export const USER_LOGGED_IN = 'USER_LOGGED_IN';
 export const CURRENT_USER = 'CURRENT_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
+export const LOGOUT_USER = 'LOGOUT_USER';
 
 //List of async actions
 export const fetchListOfUsers = () => dispatch => {
@@ -44,7 +45,7 @@ export const signupUser = userInfo => dispatch => {
         body: JSON.stringify(userInfo)
     })
     .then(response => {
-        // localStorage.setItem('token', userInfo.username)
+        localStorage.setItem('user', userInfo.username)
         dispatch(userLogin())
         return response.json()
     })
@@ -72,6 +73,10 @@ export const signinUser = userInfo => dispatch => {
     })
 }
 
+export const signoutUser = () => dispatch => {
+    localStorage.removeItem('user')
+    dispatch(logoutUser())
+}
 
 //List of sync actions
 export const fetchUsersSuccess = (users) => ({
@@ -101,4 +106,8 @@ export const currentUser = (currentUser) => ({
 export const authError = (error) => ({
     type: AUTH_ERROR,
     error
+})
+
+export const logoutUser = () => ({
+    type: LOGOUT_USER
 })
