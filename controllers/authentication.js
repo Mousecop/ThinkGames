@@ -3,18 +3,20 @@ const {User} = require('../models/models');
 const config = require('../config');
 
 function tokenForUser(user) {
+    console.log(user)
   const timestamp = new Date().getTime();
   // sub: subject
   // iat: issued at time
-  return jwt.encode({ sub: user.username, iat: timestamp }, config.secret);
+  return jwt.encode({ sub: user, iat: timestamp }, config.secret);
 }
 
 exports.signin = function(req, res, next) {
   // User has already had their email and password auth'd
   // We just need to give them a token
+  console.log('signin req', req.body.username)
   res.json({
-    token: tokenForUser(req.user),
-    user: req.user
+    token: tokenForUser(req.body.username),
+    user: req.body
   });
   next();
 }
