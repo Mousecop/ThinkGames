@@ -17,28 +17,11 @@ class Signup extends React.Component {
         const username = this.refs.username.value;
         const password = this.refs.password.value;
         const email = this.refs.email.value;
-        // const passwordConfirm = this.refs.passwordConfirm.value;
 
-        // this.validation(password, passwordConfirm, username)
         this.props.userSignUp({username, email, password});
         this.props.currentUser(username);
         this.form.reset()
     }
-
-    // validation(password, passwordConfirm, username) {
-    //     if (password !== passwordConfirm) {
-    //         console.log('passwords dont match');
-    //         this.setState({errorMessage: 'passwords do not match'})
-    //     } else if (!username) {
-    //         this.setState({
-    //             errorMessage: 'Please enter a username'
-    //         })
-    //     } else {
-    //         this.setState({
-    //             errorMessage: ''
-    //         })
-    //     }
-    // }
 
     renderAlert() {
         if (this.props.errorMessage !== '') {
@@ -49,8 +32,6 @@ class Signup extends React.Component {
             )
         }
     }
-
-    
 
     render() {
         return (
