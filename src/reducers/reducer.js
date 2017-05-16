@@ -20,6 +20,8 @@ export default (state = initalState, action) => {
             return {...state, errorMessage: action.error}
         case actions.FETCH_MESSAGES_SUCCESS:
             return {...state, messages: [...state.messages, action.messages]}
+        case actions.LOGOUT_USER:
+            return {initalState}
         default:
             return state
     }
