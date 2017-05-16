@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/action';
-import Header from '../header';
+import Header from '../header'; //eslint-disable-line no-unused-vars
 
-export class Signout extends Component {
+export class Signout extends React.Component {
   componentWillMount() {
     this.props.signoutUser();
   }
