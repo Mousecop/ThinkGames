@@ -1,18 +1,20 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import io from 'socket.io-client';
-const moment = require('moment');
+import moment from 'moment';
+import Signup from './signup'; //eslint-disable-line no-unused-vars
+import { connect } from 'react-redux';
 
 class App extends React.Component {
   constructor(props){
     super(props);
-    this.state = { messages: [] }
+    this.state = { messages: []}
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
     this.socket = io('/');
-    this.socket.on('message', message => {
+    this.socket.on('message', (message, from) => {
+      from = this.props.currentUser;
       this.setState({messages: [...this.state.messages, message]})
     })
 
@@ -26,9 +28,10 @@ class App extends React.Component {
         from: 'me',
         createdAt: moment().format('MM/D/YYYY hh:mm:ss')
       }
-      console.log(message)
+      console.log('message', message)
+      console.log('current User', this.props.currentUser)
       this.setState({messages: [...this.state.messages, message]})
-      this.socket.emit('message', body)
+      this.socket.emit('message', (body, this.props.currentUser))
       event.target.value = '';
     }
   }
@@ -42,9 +45,15 @@ class App extends React.Component {
         <h1>ThinkGames</h1>
         {messages}
          <input type="text" placeholder="Enter a message.." onKeyUp={this.handleSubmit} />
+         <Signup />
       </div>
     )
   }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  currentUser : state.currentUser,
+  messages: state.messages
+})
+
+export default connect(mapStateToProps)(App);
