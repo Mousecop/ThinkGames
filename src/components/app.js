@@ -1,6 +1,7 @@
 import React from 'react';
 import io from 'socket.io-client';
 import moment from 'moment';
+import Login from './login'; //eslint-disable-line no-unused-vars
 import Signup from './signup'; //eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
 
@@ -13,11 +14,10 @@ class App extends React.Component {
 
   componentDidMount() {
     this.socket = io('/');
-    this.socket.on('message', (message, from) => {
-      from = this.props.currentUser;
+    this.socket.on('message', (message) => {
       this.setState({messages: [...this.state.messages, message]})
     })
-
+    this.socket.on('add user', this.props.currentUser)
   }
 
   handleSubmit(event) {
@@ -31,7 +31,8 @@ class App extends React.Component {
       console.log('message', message)
       console.log('current User', this.props.currentUser)
       this.setState({messages: [...this.state.messages, message]})
-      this.socket.emit('message', (body, this.props.currentUser))
+      this.socket.emit('add user', this.props.currentUser)
+      this.socket.emit('message', (body))
       event.target.value = '';
     }
   }
@@ -45,7 +46,8 @@ class App extends React.Component {
         <h1>ThinkGames</h1>
         {messages}
          <input type="text" placeholder="Enter a message.." onKeyUp={this.handleSubmit} />
-         <Signup />
+         {/*<Signup />*/}
+         <Login />
       </div>
     )
   }
