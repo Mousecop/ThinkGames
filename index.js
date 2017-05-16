@@ -4,11 +4,16 @@ const bodyParser = require('body-parser');
 const socketIo = require('socket.io');
 const webpack = require('webpack');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackConfig = require('./webpack.config.js')
 const {User, ChatHistory, Messages} = require('./models/models');
 const DATABASE_URL = 'mongodb://localhost/thinkgames-db';
 const moment = require('moment');
+const auth = require('./controllers/authentication');
+// const passport = require('passport');
+// const passportService = require('./services/passport');
+// const requireSignin = passport.authenticate('local', { session: false });
 
 mongoose.Promise = global.Promise;
 
@@ -16,9 +21,10 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public')); //eslint-disable-line no-undef
 app.use(webpackDevMiddleware(webpack(webpackConfig)));
 app.use(bodyParser.json())
+app.use(cookieParser())
 
 mongoose.connect(DATABASE_URL, err => {
     if(err) {
@@ -78,23 +84,8 @@ app.get('/api/user/:username', (req, res) => {
         })
 })
 
-//Basic user signup. TODO: add bcyrpt
-app.post('/api/users/signup', (req, res) => {
-    User
-        .create({
-            username: req.body.username,
-            password: req.body.password,
-            email: req.body.email
-        })
-        .then(newUser => {
-            console.log(newUser)
-            res.status(201).json(newUser)
-        })
-        .catch(err => {
-            console.log(err)
-            res.status(500).json({message:'internal server error'});
-        })
-})
+//Basic user signup.
+app.post('/api/users/signup', auth.signup)
 
 //Creates a new message in db, and then adds to chat history array for displaying later.
 app.post('/api/new/message', (req, res) => {
@@ -153,16 +144,17 @@ io.on('connection', socket =>{
         console.log('user has disconnected')
     });
 
-    socket.on('message', body => {
+    socket.on('message', (body, from) => {
+        console.log('from', from)
         db.collection('messages').insert({
-                fromUser: socket.id.slice(9),
+                fromUser: from,
                 messageContent: body,
                 createdAt: Date.now()
             });
             
         socket.broadcast.emit('message', {
             body,
-            from: socket.id.slice(9),
+            from: from,
             createdAt: moment().format('MM/D/YYYY hh:mm:ss')
         })
     });
