@@ -2,6 +2,8 @@ export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 export const FETCH_USER_ERROR = 'FETCH_USERE_RROR';
 export const FETCH_MESSAGES_SUCCESS = 'FETCH_MESSAGES_SUCCESS';
 export const FETCH_CURRENT_USER_SUCCESS = 'FETCH_CURRENT_USER_SUCCESS';
+export const USER_LOGGED_IN = 'USER_LOGGED_IN';
+export const CURRENT_USER = 'CURRENT_USER';
 
 //List of async actions
 export const fetchListOfUsers = () => dispatch => {
@@ -37,6 +39,25 @@ export const fetchMessages = () => dispatch => {
         })
 }
 
+export const signupUser = (userInfo) => dispatch => {
+    console.log(userInfo)
+    fetch('/api/users/signup', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(userInfo)
+    })
+    .then(response => {
+        console.log(response)
+        return response.json()
+    })
+    .then(userInfo => {
+        dispatch(userLogin())
+    })
+}
+
 
 //List of sync actions
 export const fetchUsersSuccess = (users) => ({
@@ -53,3 +74,12 @@ export const fetchMessagesSuccess = (messages) => ({
     type: FETCH_MESSAGES_SUCCESS,
     messages
 });
+
+export const userLogin = () => ({
+    type: USER_LOGGED_IN
+})
+
+export const currentUser = (currentUser) => ({
+    type: CURRENT_USER,
+    currentUser
+})
