@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router'; //eslint-disable-line no-unused-vars
+import { Link } from 'react-router-dom'; //eslint-disable-line no-unused-vars
 
 class Header extends React.Component {
     constructor(props) {
