@@ -4,15 +4,10 @@
   "description": "ThinkGames - The Place to Talk About Games",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node index.js",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm run build",
-    "dev": "run-p dev:server dev:client start",
-    "dev:client": "cd client && cross-env BROWSER=none npm start -- --color=always | xp http://localhost:3000/ http://localhost:8080/",
-    "dev:server": "cd server && npm start",
-    "install": "run-s install:server install:client",
-    "install:server": "cd server && npm install",
-    "install:client": "cd client && npm install",
+    "start": "react-scripts start",
+    "dev": "nodemon index.js",
     "build": "react-scripts build",
+    "test": "mocha --require ignore-styles --recursive --compilers js:babel-core/register",
     "eject": "react-scripts eject"
   },
   "engines": {
