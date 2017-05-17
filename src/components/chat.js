@@ -4,7 +4,7 @@ import moment from 'moment';
 import Header from './header'; //eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
 
-class App extends React.Component {
+class Chat extends React.Component {
   constructor(props){
     super(props);
     this.state = { messages: []}
@@ -55,4 +55,4 @@ const mapStateToProps = (state) => ({
   messages: state.messages
 })
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(Chat);
