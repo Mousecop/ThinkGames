@@ -1,7 +1,7 @@
 import React from 'react';
-import '../style/grid.css'
+// import '../styles/grid.css'
 import Header from './header' //eslint-disable-line no-unused-vars
-import {Link} from 'react-router-dom'; //eslint-disable-line no-unused-vars
+import {Link} from 'react-router'; //eslint-disable-line no-unused-vars
 
 class Home extends React.Component {
     constructor(props) {
@@ -22,7 +22,7 @@ class Home extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="about-section" classId="about">
+                <div className="about-section" classID="about">
                     <div className="row">
                         <div className="col-6">
                             <div className="about-info">
