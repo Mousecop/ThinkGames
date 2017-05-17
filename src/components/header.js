@@ -24,10 +24,13 @@ class Header extends React.Component {
                 <Link to='/' key={0}>
                     <li className="brand">ThinkGames</li>
                 </Link>,
-                <Link to='/signup' key={1}>
+                <Link to='#about' key={1}>
                     <li className="signup-button">Sign Up</li>
                 </Link>,
-                <Link to='/signin' key={2}>
+                <Link to='/signup' key={2}>
+                    <li className="signup-button">Sign Up</li>
+                </Link>,
+                <Link to='/signin' key={3}>
                     <li className="signin-button">Sign In</li>
                 </Link>,
             ]
