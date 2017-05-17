@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app';
-import { Provider } from 'react-redux';
+import { Provider } from 'react-redux'; //eslint-disable-line no-unused-vars
 import store from './store.jsx';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router'; //eslint-disable-line no-unused-vars
 import {userLogin} from './actions/action';
 
 import Home from './components/home';
