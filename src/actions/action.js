@@ -7,6 +7,8 @@ export const CURRENT_USER = 'CURRENT_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const LOGOUT_USER = 'LOGOUT_USER';
 
+import { browserHistory } from 'react-router';
+
 //List of async actions
 export const fetchListOfUsers = () => dispatch => {
     fetch('/api/user')
@@ -47,6 +49,7 @@ export const signupUser = userInfo => dispatch => {
     .then(response => {
         localStorage.setItem('user', userInfo.username)
         dispatch(userLogin())
+        browserHistory.push('/chat')
         return response.json()
     })
     .catch(err => {
@@ -66,6 +69,7 @@ export const signinUser = userInfo => dispatch => {
     .then(response => {
         dispatch(userLogin())
         localStorage.setItem('user', userInfo.username)
+        browserHistory.push('/chat')
     })
     .catch(err => {
         console.log('signin error:',err);
