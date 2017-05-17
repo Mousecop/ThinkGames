@@ -1,13 +1,25 @@
 {
   "name": "chat-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "ThinkGames - The Place to Talk About Games",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "babel-node index.js",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm run build",
+    "dev": "run-p dev:server dev:client start",
+    "dev:client": "cd client && cross-env BROWSER=none npm start -- --color=always | xp http://localhost:3000/ http://localhost:8080/",
+    "dev:server": "cd server && npm start",
+    "install": "run-s install:server install:client",
+    "install:server": "cd server && npm install",
+    "install:client": "cd client && npm install",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject"
+  },
+  "engines": {
+  "node": "7.5.0"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jacob Askew <joaskew13@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "babel-core": "^6.24.1",
@@ -44,6 +56,7 @@
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^5.0.1",
-    "eslint-plugin-react": "^7.0.0"
+    "eslint-plugin-react": "^7.0.0",
+    "react-scripts": "0.9.0"
   }
 }

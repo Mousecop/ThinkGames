@@ -4,10 +4,11 @@ module.exports = {
     path: '/',
     filename: 'bundle.js'
   },
-  devtool: 'source-maps',
+  devtool: 'eval-source-maps',
   module: {
     loaders: [
       {
+        exclude: /node_modules/,
         test: /\.js$/,
         loader: 'babel-loader',
         query: {
