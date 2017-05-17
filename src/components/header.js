@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'; //eslint-disable-line no-unused-vars
+import { Link } from 'react-router'; //eslint-disable-line no-unused-vars
 
 class Header extends React.Component {
     constructor(props) {
@@ -25,14 +25,14 @@ class Header extends React.Component {
                     <li className="brand">ThinkGames</li>
                 </Link>,
                 <Link to='#about' key={1}>
-                    <li className="signup-button">Sign Up</li>
+                    <li className="signup-button">About</li>
                 </Link>,
                 <Link to='/signup' key={2}>
                     <li className="signup-button">Sign Up</li>
                 </Link>,
-                <Link to='/signin' key={3}>
-                    <li className="signin-button">Sign In</li>
-                </Link>,
+                <Link to='/login' key={3}>
+                    <li className="signin-button">Login</li>
+                </Link>
             ]
         }
     }
