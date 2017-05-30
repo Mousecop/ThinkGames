@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router'; //eslint-disable-line no-unused-vars
+import '../styles/header.css';
 
 class Header extends React.Component {
     constructor(props) {
@@ -43,7 +44,7 @@ class Header extends React.Component {
     render() {
         return(
             <nav>
-                <ul>
+                <ul className="nav-links">
                     {this.renderLinks()}
                 </ul>
             </nav>
