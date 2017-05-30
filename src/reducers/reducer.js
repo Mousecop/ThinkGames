@@ -5,7 +5,7 @@ const initalState = {
     currentUser: '',
     Users: [],
     isUserLoggedIn: false,
-    errorMessage: ''
+    errorMessage: null
 }
 
 export default (state = initalState, action) => {
