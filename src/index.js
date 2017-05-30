@@ -10,24 +10,8 @@ import Home from './components/home';
 import Login from './components/login';
 import Signup from './components/signup';
 import Signout from './components/signout';
-// import RequireAuth from './components/require_auth';
 import Chat from './components/chat';
 
-function requireAuth(nextState, replace, callback) {
-    const user = localStorage.getItem('user');
-    if(!user) {
-        replace('/signup')
-    }
-    return callback()
-}
-
-// const user = localStorage.getItem('user');
-
-
-// if (user) {
-//     console.log(user)
-//     store.dispatch(userLogin())
-// }
 
 ReactDOM.render(
 <Provider store={store}>
@@ -37,7 +21,7 @@ ReactDOM.render(
             <Route path='/login' component={Login}/>
             <Route path='/signup' component={Signup} />
             <Route path='/signout' component={Signout} />
-            <Route path='/chat' component={Chat} onEnter={requireAuth}/>
+            <Route path='/chat' component={Chat}/>
         </Route>
     </Router>
 </Provider>, 
