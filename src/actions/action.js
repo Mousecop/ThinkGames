@@ -47,7 +47,6 @@ export const signupUser = userInfo => dispatch => {
         body: JSON.stringify(userInfo)
     })
     .then(response => {
-        localStorage.setItem('user', userInfo.username)
         dispatch(userLogin())
         browserHistory.push('/chat')
         return response.json()
