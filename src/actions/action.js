@@ -57,7 +57,8 @@ export const signupUser = userInfo => dispatch => {
     })
 }
 
-export const signinUser = userInfo => dispatch => {
+export const signinUser = (userInfo) => dispatch => {
+    console.log('userinfo', userInfo)
     fetch('/api/users/signin', {
         method: 'POST',
         headers: {
@@ -67,9 +68,14 @@ export const signinUser = userInfo => dispatch => {
         body: JSON.stringify(userInfo)
     })
     .then(response => {
-        dispatch(userLogin())
-        localStorage.setItem('user', userInfo.username)
-        browserHistory.push('/chat')
+        console.log('POST REQUEST BODY:', response)
+        if(response.status >= 300) {
+            dispatch(authError('Bad login info'))
+            return browserHistory.push('/login')
+        } else{
+            dispatch(userLogin())
+            browserHistory.push('/chat')
+        }
     })
     .catch(err => {
         console.log('signin error:',err);
