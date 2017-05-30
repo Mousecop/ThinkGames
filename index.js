@@ -14,9 +14,6 @@ const auth = require('./controllers/authentication');
 const passport = require('passport');
 const cors = require('cors')
 const LocalStrategy = require('passport-local').Strategy;
-const JwtStrategy = require('passport-jwt').Strategy;
-const ExtractJwt = require('passport-jwt').ExtractJwt;
-const config = require('./config');
 
 mongoose.Promise = global.Promise;
 
@@ -29,56 +26,41 @@ app.use(webpackDevMiddleware(webpack(webpackConfig)));
 app.use(bodyParser.json())
 app.use(cookieParser())
 app.use(cors())
-app.use(passport.initialize())
-
-
 
 // Create local strategy
-const localOptions = { usernameField: 'username' };
-const localLogin = new LocalStrategy(localOptions, function(username, password, done) {
+const localLogin = new LocalStrategy({passReqToCallBack: true}, function(username, password, done) {
+    console.log(username)
   // Verify this username and password, call done with the user if
   // is the correct username and password
   // otherwise, call done with false
-  return User.findOne({ username: username }, function(err, user) {
-    if (err) { return done(err); }
-    if (!user) { console.log('user not found'); return done(null, false); }
+  User.findOne({ username: username }, function(err, user) {
+        if (err) { return done(err); }
+        if (!user) { 
+            console.log('user not found');
+            return done(null, false); 
+        }
 
-    // compare passwords - is req password = to user password?
-    return user.comparePassword(password, function(err, isMatch) {
-      if (err) { return done(err); }
-      if (!isMatch) { console.log('password does not match'); return done(null, false); }
+        // compare passwords - is req password = to user password?
+        user.comparePassword(password, function(err, isMatch) {
+            if (err) { return done(err); }
+            if (!isMatch) { return done(null, false); }
 
-      return done(null, user);  
+            return done(null, user);
+        }); 
     });
   });
+
+app.use(passport.initialize())
+passport.use(localLogin)
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
 });
 
-// Create JWT strategy
-const jwtOptions = {
-  jwtFromRequest: ExtractJwt.fromHeader('authorization'),
-  secretOrKey: config.secret
-};
-const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
-  // payload is sub property and iat property
-  // See if the user ID in the payload exists in our database
-  User.findById(payload.sub, function(err, user) {
-    if (err) { return done(err, false); }
-
-    // If it does, call 'done' with that user
-    if (user) {
-      done(null, user);
-    }
-    // otherwise, call done without a user object
-    else {
-      done(null, false);
-    }
-
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
   });
 });
-passport.use('jwt', jwtLogin)
-passport.use('local-login', localLogin)
-const requireSignin = passport.authenticate('local-login', { session: false });
-const requireAuth = passport.authenticate('jwt', { session: false });
 
 mongoose.connect(DATABASE_URL, err => {
     if(err) {
@@ -91,9 +73,9 @@ mongoose.connect(DATABASE_URL, err => {
 
 const db = mongoose.connection;
 
-app.get('/', requireAuth, (req, res) => {
-    res.send({message: 'super secret message'})
-})
+// app.get('/', (req, res) => {
+//     res.send({message: 'super secret message'})
+// })
 
 app.get('/api/users', (req, res) => {
     User
@@ -142,7 +124,17 @@ app.get('/api/user/:username', (req, res) => {
 })
 
 app.post('/api/users/signup', auth.signup)
-app.post('/api/users/signin', requireSignin, auth.signin)
+app.post('/api/users/signin', (req, res, next) => {
+    passport.authenticate('local', {session: false}, function(err, user, info) {
+        if(err) { return next(err)}
+        if(!user) {res.sendStatus(401)}
+
+        req.logIn(user, function(err) {
+            if(err) {return next(err);}
+            return res.sendStatus(200)
+        });
+    })(req, res, next);
+})
 
 //Creates a new message in db, and then adds to chat history array for displaying later.
 app.post('/api/new/message', (req, res) => {
