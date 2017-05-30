@@ -13,7 +13,7 @@ class Login extends React.Component {
         e.preventDefault()
         const username = this.refs.username.value;
         const password = this.refs.password.value;
-        console.log('username:', username)
+        // console.log('username:', username)
         
         this.props.signIn({username, password})
         this.props.currentUser(username)
