@@ -1,5 +1,5 @@
 import React from 'react';
-// import '../styles/grid.css'
+import '../styles/grid.css'
 import Header from './header' //eslint-disable-line no-unused-vars
 import {Link} from 'react-router'; //eslint-disable-line no-unused-vars
 
