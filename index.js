@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackConfig = require('./webpack.config.js')
 const {User, ChatHistory, Messages} = require('./models/models');
-const DATABASE_URL = 'mongodb://localhost/thinkgames-db';
+const DATABASE_URL = 'mongodb://dev:dev@ds157621.mlab.com:57621/thinkgames-db';
 const moment = require('moment');
 const auth = require('./controllers/authentication');
 const passport = require('passport');
@@ -36,19 +36,19 @@ app.use(passport.initialize())
 // Create local strategy
 const localOptions = { usernameField: 'username' };
 const localLogin = new LocalStrategy(localOptions, function(username, password, done) {
-  // Verify this email and password, call done with the user if
-  // is the correct email and password
+  // Verify this username and password, call done with the user if
+  // is the correct username and password
   // otherwise, call done with false
   return User.findOne({ username: username }, function(err, user) {
     if (err) { return done(err); }
-    if (!user) { return done(null, false); }
+    if (!user) { console.log('user not found'); return done(null, false); }
 
     // compare passwords - is req password = to user password?
     return user.comparePassword(password, function(err, isMatch) {
       if (err) { return done(err); }
-      if (!isMatch) { return done(null, false); }
+      if (!isMatch) { console.log('password does not match'); return done(null, false); }
 
-      return done(null, user);
+      return done(null, user);  
     });
   });
 });
