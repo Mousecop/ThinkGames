@@ -24,7 +24,7 @@ class Signup extends React.Component {
     }
 
     renderAlert() {
-        if (this.props.errorMessage !== '') {
+        if (this.props.errorMessage !== null) {
             return (
                 <div className="error">
                     <strong>Oops!</strong> {this.props.errorMessage}
@@ -51,7 +51,7 @@ class Signup extends React.Component {
                             <label htmlFor="password" className="passwordLabel">Password</label>
                             <input type="password" id="password" ref="password" required/>
                         </fieldset>
-                        {this.renderAlert()}
+                        {this.renderAlert}
                         <button action="submit" className="signup-submit-button">Sign up!</button>
                     </form>
                 </div>
