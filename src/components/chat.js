@@ -42,6 +42,7 @@ class Chat extends React.Component {
     })
     return (
       <div>
+        <Header />
         <h1>ThinkGames</h1>
         {messages}
          <input type="text" placeholder="Enter a message.." onKeyUp={this.handleSubmit} />
