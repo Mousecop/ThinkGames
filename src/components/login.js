@@ -13,6 +13,7 @@ class Login extends React.Component {
         e.preventDefault()
         const username = this.refs.username.value;
         const password = this.refs.password.value;
+        console.log('username:', username)
         
         this.props.signIn({username, password})
         this.props.currentUser(username)
@@ -20,7 +21,7 @@ class Login extends React.Component {
     }
 
     renderAlert() {
-        if (this.props.errorMessage !== '') {
+        if (this.props.errorMessage !== null) {
             return (
                 <div className="error">
                     <strong>Oops!</strong> {this.props.errorMessage}
@@ -36,13 +37,13 @@ class Login extends React.Component {
                 <form className="login-form" onSubmit={e => this.handleSubmit(e)} ref={ref => this.form = ref}>
                     <fieldset>
                         <label htmlFor="username">Username: </label>
-                        <input type="text" placeholder="Enter Username" id="username" ref="username"/>
+                        <input type="text" placeholder="Enter Username" id="username" ref="username" required/>
                     </fieldset>
                     <fieldset>
                         <label htmlFor="password">Password: </label>
-                        <input type="password" placeholder="Enter Password" id="password" ref="password"/>
+                        <input type="password" placeholder="Enter Password" id="password" ref="password" required/>
                     </fieldset>
-                    {this.renderAlert()}
+                    {this.renderAlert}
                     <button type="submit">Sign in!</button>
                 </form>
             </div>
