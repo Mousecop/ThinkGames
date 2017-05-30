@@ -51,7 +51,7 @@ class Signup extends React.Component {
                             <label htmlFor="password" className="passwordLabel">Password</label>
                             <input type="password" id="password" ref="password" required/>
                         </fieldset>
-                        {this.renderAlert}
+                        {this.renderAlert()}
                         <button action="submit" className="signup-submit-button">Sign up!</button>
                     </form>
                 </div>
