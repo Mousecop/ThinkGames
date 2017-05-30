@@ -4,24 +4,30 @@ import App from './components/app';
 import { Provider } from 'react-redux'; //eslint-disable-line no-unused-vars
 import store from './store.jsx';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'; //eslint-disable-line no-unused-vars
-import {userLogin} from './actions/action';
+// import {userLogin} from './actions/action';
 
 import Home from './components/home';
 import Login from './components/login';
 import Signup from './components/signup';
 import Signout from './components/signout';
-import RequireAuth from './components/require_auth';
+// import RequireAuth from './components/require_auth';
 import Chat from './components/chat';
 
-
-
-const user = localStorage.getItem('user');
-
-
-if (user) {
-    console.log(user)
-    store.dispatch(userLogin())
+function requireAuth(nextState, replace, callback) {
+    const user = localStorage.getItem('user');
+    if(!user) {
+        replace('/signup')
+    }
+    return callback()
 }
+
+// const user = localStorage.getItem('user');
+
+
+// if (user) {
+//     console.log(user)
+//     store.dispatch(userLogin())
+// }
 
 ReactDOM.render(
 <Provider store={store}>
@@ -31,7 +37,7 @@ ReactDOM.render(
             <Route path='/login' component={Login}/>
             <Route path='/signup' component={Signup} />
             <Route path='/signout' component={Signout} />
-            <Route path='/chat' component={RequireAuth(Chat)} />
+            <Route path='/chat' component={Chat} onEnter={requireAuth}/>
         </Route>
     </Router>
 </Provider>, 
