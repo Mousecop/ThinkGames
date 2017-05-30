@@ -41,7 +41,7 @@ class Login extends React.Component {
                         <label htmlFor="password">Password: </label>
                         <input type="password" placeholder="Enter Password" id="password" ref="password" required/>
                     </fieldset>
-                    {this.renderAlert}
+                    {this.renderAlert()}
                     <button type="submit">Sign in!</button>
                 </form>
             </div>
