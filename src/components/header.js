@@ -14,7 +14,10 @@ class Header extends React.Component {
                 <Link to='/' key={0}>
                     <li className="brand">ThinkGames</li>
                 </Link>,
-                <Link to='/signout' key={1}>
+                <Link to='/chat' key={1}>
+                    <li className="chat-home">Chat Room</li>
+                </Link>,
+                <Link to='/signout' key={2}>
                     <li className="signout-button">Sign Out</li>
                 </Link>
             ]
