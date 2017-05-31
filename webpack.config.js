@@ -2,7 +2,7 @@ module.exports = {
   entry: __dirname + '/src',
   output: {
     path: '/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   devtool: 'eval-source-maps',
   module: {
@@ -19,6 +19,10 @@ module.exports = {
       {
          test: /\.css$/, 
          loader: 'style-loader!css-loader'
+      },
+      {
+         test: /\.(png|jpg)$/, 
+         loader: 'file-loader?emitFile=false&name=[path][name].[ext]' 
       }
     ]
   }
