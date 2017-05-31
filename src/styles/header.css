@@ -6,6 +6,11 @@ nav {
     height: 65px;
 }
 
+.navbar-inverse {
+    margin-bottom: 0px;
+    border-radius: 0px;
+}
+
 nav li {
     list-style: none;
     font-size: 22px;
