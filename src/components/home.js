@@ -5,6 +5,7 @@ import { Link } from 'react-router'; //eslint-disable-line no-unused-vars
 import { LinkContainer } from 'react-router-bootstrap'
 import '../styles/grid.css'
 import '../styles/home.css'
+// import img from '.../public/images/computer-image.jpg'
 
 class Home extends React.Component {
     constructor(props) {
@@ -12,10 +13,18 @@ class Home extends React.Component {
     }
 
     render() {
+        const spanStyle = {
+            borderBottom: '2px solid #2C8C99'
+        }
+        const backgroundImage = {
+            background: 'url(http://wallpapercave.com/wp/rJRFZZ8.png)no-repeat center',
+            backgroundSize: 'cover',
+            
+        }
         return(
             <div className="home-container">
                 <Header />
-                <div className="title-section">
+                <div className="title-section" style={backgroundImage}>
                     <div className="row">
                         <div className="col-12">
                             <div className="title-container">
@@ -26,6 +35,7 @@ class Home extends React.Component {
                     </div>
                 </div>
                 <div className="about-section" classID="about">
+                    <h3 className="about-title">What is <span style={spanStyle}>ThinkGames?</span></h3>
                     <div className="row">
                         <div className="col-6">
                             <div className="about-info">
