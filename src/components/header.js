@@ -15,20 +15,20 @@ class Header extends React.Component {
     renderLinks() {
         if(this.props.isUserLoggedIn) {
             return [
-                <LinkContainer to='/chat' eventKey={1}>
+                <LinkContainer to='/chat' key={1}>
                     <NavItem className="chat-home">Chat Room</NavItem>
                 </LinkContainer>,
-                <Link to='/signout' eventKey={2}>
+                <Link to='/signout' key={2}>
                     <NavItem className="signout-button">Sign Out</NavItem>
                 </Link>
             ]
         }
         else {
             return [
-                <LinkContainer to='/signup' eventKey={1}>
+                <LinkContainer to='/signup' key={1}>
                     <NavItem className="signup-button">Sign Up</NavItem>
                 </LinkContainer>,
-                <LinkContainer to='/login' eventKey={2}>
+                <LinkContainer to='/login' key={2}>
                     <NavItem className="signin-button">Login | Demo</NavItem>
                 </LinkContainer>
             ]
@@ -37,11 +37,11 @@ class Header extends React.Component {
 
     render() {
         return(
-            <Navbar inverse collapseOnSelect>
+            <Navbar inverse collapseOnSelect fixedTop>
                 <Navbar.Header>
                     <Navbar.Brand>
                         <LinkContainer to='/'>
-                            <NavItem eventKey={1} className="brand">ThinkGames</NavItem>
+                            <NavItem key={1} className="brand">ThinkGames</NavItem>
                         </LinkContainer>
                     </Navbar.Brand>
                     <Navbar.Toggle />
