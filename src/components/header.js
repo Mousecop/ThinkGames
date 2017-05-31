@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router'; //eslint-disable-line no-unused-vars
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import '../styles/header.css';
+import { LinkContainer } from 'react-router-bootstrap';
+
 
 class Header extends React.Component {
     constructor(props) {
@@ -12,42 +15,43 @@ class Header extends React.Component {
     renderLinks() {
         if(this.props.isUserLoggedIn) {
             return [
-                <Link to='/' key={0}>
-                    <li className="brand">ThinkGames</li>
-                </Link>,
-                <Link to='/chat' key={1}>
-                    <li className="chat-home">Chat Room</li>
-                </Link>,
-                <Link to='/signout' key={2}>
-                    <li className="signout-button">Sign Out</li>
+                <LinkContainer to='/chat' eventKey={1}>
+                    <NavItem className="chat-home">Chat Room</NavItem>
+                </LinkContainer>,
+                <Link to='/signout' eventKey={2}>
+                    <NavItem className="signout-button">Sign Out</NavItem>
                 </Link>
             ]
         }
         else {
             return [
-                <Link to='/' key={0}>
-                    <li className="brand">ThinkGames</li>
-                </Link>,
-                <Link to='#about' key={1}>
-                    <li className="signup-button">About</li>
-                </Link>,
-                <Link to='/signup' key={2}>
-                    <li className="signup-button">Sign Up</li>
-                </Link>,
-                <Link to='/login' key={3}>
-                    <li className="signin-button">Login</li>
-                </Link>
+                <LinkContainer to='/signup' eventKey={1}>
+                    <NavItem className="signup-button">Sign Up</NavItem>
+                </LinkContainer>,
+                <LinkContainer to='/login' eventKey={2}>
+                    <NavItem className="signin-button">Login | Demo</NavItem>
+                </LinkContainer>
             ]
         }
     }
 
     render() {
         return(
-            <nav>
-                <ul className="nav-links">
-                    {this.renderLinks()}
-                </ul>
-            </nav>
+            <Navbar inverse collapseOnSelect>
+                <Navbar.Header>
+                    <Navbar.Brand>
+                        <LinkContainer to='/'>
+                            <NavItem eventKey={1} className="brand">ThinkGames</NavItem>
+                        </LinkContainer>
+                    </Navbar.Brand>
+                    <Navbar.Toggle />
+                </Navbar.Header>
+                <Navbar.Collapse>
+                    <Nav pullRight>
+                        {this.renderLinks()}
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
         )
     }
 }
