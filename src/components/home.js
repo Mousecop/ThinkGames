@@ -1,7 +1,10 @@
 import React from 'react';
-import '../styles/grid.css'
+import { Col, Row, Grid } from 'react-bootstrap';
 import Header from './header' //eslint-disable-line no-unused-vars
-import {Link} from 'react-router'; //eslint-disable-line no-unused-vars
+import { Link } from 'react-router'; //eslint-disable-line no-unused-vars
+import { LinkContainer } from 'react-router-bootstrap'
+import '../styles/grid.css'
+import '../styles/home.css'
 
 class Home extends React.Component {
     constructor(props) {
