@@ -2,3 +2,38 @@
     box-sizing: border-box;
 }
 
+nav {
+    height: 65px;
+}
+
+nav li {
+    list-style: none;
+    font-size: 22px;
+}
+
+.navbar-brand {
+    font-size: 22px;
+    padding-top: 21px;
+}
+
+.navbar-brand a {
+    color: #FFF;  
+    text-decoration: none;
+}
+
+.navbar-brand a:hover {
+    color: #2C8C99;
+}
+
+.navbar-nav>li>a {
+    padding-top: 21px;
+}
+
+.signup-button a:hover, .signin-button a:hover {
+    color: #2C8C99!important;
+}
+
+.signin-button {
+    margin-left: 10px;
+}
+
