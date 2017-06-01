@@ -11,6 +11,11 @@ nav {
     border-radius: 0px;
 }
 
+.navbar-inverse .navbar-nav>.active>a {
+    background-color: #222;
+    color: #2C8C99;
+}
+
 nav li {
     list-style: none;
     font-size: 22px;
