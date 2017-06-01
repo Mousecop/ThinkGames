@@ -77,12 +77,14 @@
     background-color: #2C8C99;
     color: #FFF;
     text-decoration: none;
+    border: none;
 }
 
 .signup-link:hover {
     text-decoration: none;
     background-color: #1b5861;
     color: #FFF;
+    box-shadow:1px 1px 20px 2px rgba(0, 0, 0, 0.5);
 }
 
 footer {
