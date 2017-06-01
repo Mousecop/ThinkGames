@@ -1,6 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions/action';
+import Header from './header'
+import '../styles/signup.css';
+import '../styles/grid.css';
 
 
 class Signup extends React.Component {
@@ -36,24 +39,24 @@ class Signup extends React.Component {
     render() {
         return (
             <div className="signup-container">
-                <div>
-                    <h1 className="signup-title">Get started</h1>
-                    <form className="signup-form" onSubmit={e => this.handleFormSubmit(e)} ref={ref => this.form = ref}>
-                        <fieldset>
-                            <label htmlFor="username" className="usernameLabel">Username</label>
-                            <input type="text" id="username" ref="username" required/>
-                        </fieldset>
-                         <fieldset>
-                            <label htmlFor="email" className="emailLabel">Email</label>
-                            <input type="email" id="email" ref="email" required/>
-                        </fieldset>
-                         <fieldset>
-                            <label htmlFor="password" className="passwordLabel">Password</label>
-                            <input type="password" id="password" ref="password" required/>
-                        </fieldset>
-                        {this.renderAlert()}
-                        <button action="submit" className="signup-submit-button">Sign up!</button>
-                    </form>
+                <Header />
+                <div className="row">
+                    <div className="col-12">
+                        <h1 className="signup-title">Get started</h1>
+                        <form className="signup-form" onSubmit={e => this.handleFormSubmit(e)} ref={ref => this.form = ref}>
+                            <fieldset>
+                                <input type="text" id="username" ref="username" required placeholder="Enter a Username"/>
+                            </fieldset>
+                            <fieldset>
+                                <input type="email" id="email" ref="email" placeholder="Enter an Email"/>
+                            </fieldset>
+                            <fieldset>
+                                <input type="password" id="password" ref="password" required placeholder="Enter a Password"/>
+                            </fieldset>
+                            {this.renderAlert()}
+                            <button action="submit" className="signup-submit-button">Sign up!</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         )
