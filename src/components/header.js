@@ -16,20 +16,20 @@ class Header extends React.Component {
         if(this.props.isUserLoggedIn) {
             return [
                 <LinkContainer to='/chat' key={1}>
-                    <NavItem className="chat-home">Chat Room</NavItem>
+                    <NavItem className="chat-home" eventKey={1}>Chat Room</NavItem>
                 </LinkContainer>,
                 <Link to='/signout' key={2}>
-                    <NavItem className="signout-button">Sign Out</NavItem>
+                    <NavItem className="signout-button" eventKey={2}>Sign Out</NavItem>
                 </Link>
             ]
         }
         else {
             return [
                 <LinkContainer to='/signup' key={1}>
-                    <NavItem className="signup-button">Sign Up</NavItem>
+                    <NavItem className="signup-button" eventKey={1}>Sign Up</NavItem>
                 </LinkContainer>,
                 <LinkContainer to='/login' key={2}>
-                    <NavItem className="signin-button">Login | Demo</NavItem>
+                    <NavItem className="signin-button" eventKey={2}>Login | Demo</NavItem>
                 </LinkContainer>
             ]
         }
@@ -41,7 +41,7 @@ class Header extends React.Component {
                 <Navbar.Header>
                     <Navbar.Brand>
                         <LinkContainer to='/'>
-                            <NavItem key={1} className="brand">ThinkGames</NavItem>
+                            <NavItem key={1} className="brand" eventKey={1}>ThinkGames</NavItem>
                         </LinkContainer>
                     </Navbar.Brand>
                     <Navbar.Toggle />
