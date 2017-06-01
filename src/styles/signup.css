@@ -59,6 +59,10 @@ input:focus {
     box-shadow:1px 1px 20px 2px rgba(0, 0, 0, 0.5);
 }
 
+.error {
+    color: red;
+}
+
 @media only screen and (max-width: 500px) {
   form, input {
     width: 100%;
