@@ -52,11 +52,14 @@ class Home extends React.Component {
                 <div className="signup-section">
                     <div className="row">
                         <div className="col-12">
-                            <h2 className="signup-header">Create Your Account Today</h2>
+                            <h2 className="signup-header">Create Your Account Today!</h2>
                             <Link to="/signup" className="signup-link">Sign Up</Link>
                         </div>
                     </div>
                 </div>
+                <footer>
+                    <p>@ <a href="https://github.com/Mousecop">Jacob Askew</a></p>
+                </footer>
             </div>
         )
     }
