@@ -57,3 +57,48 @@
     -webkit-box-shadow: 1px 1px 20px 2px rgba(0, 0, 0, 0.88);
     -moz-box-shadow: 1px 1px 20px 2px rgba(0, 0, 0, 0.88);
 }
+
+.signup-section {
+    text-align: center;
+    height: 300px;
+    margin-top: 70px;
+}
+
+.signup-header {
+    margin-bottom: 60px;
+}
+
+.signup-link {
+    appearance: button;
+    -moz-appearance: button;
+    -webkit-appearance: button;
+    padding: 20px;
+    font-size: 18px;
+    background-color: #2C8C99;
+    color: #FFF;
+    text-decoration: none;
+}
+
+.signup-link:hover {
+    text-decoration: none;
+    background-color: #1b5861;
+    color: #FFF;
+}
+
+footer {
+    height: 66px;
+    background-color: #222;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+}
+
+footer p{
+    text-align: center;
+    padding: 22px;
+    color:  #FFF;
+    font-size: 15px;
+    margin-top: 0;
+    color: #2C8C99;
+    margin-bottom: 0px;
+}
