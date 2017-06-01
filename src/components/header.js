@@ -18,9 +18,9 @@ class Header extends React.Component {
                 <LinkContainer to='/chat' key={1}>
                     <NavItem className="chat-home" eventKey={1}>Chat Room</NavItem>
                 </LinkContainer>,
-                <Link to='/signout' key={2}>
+                <LinkContainer to='/signout' key={2}>
                     <NavItem className="signout-button" eventKey={2}>Sign Out</NavItem>
-                </Link>
+                </LinkContainer>
             ]
         }
         else {
