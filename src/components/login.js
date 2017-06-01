@@ -8,11 +8,11 @@ import '../styles/login.css'
 class Login extends React.Component {
     constructor(props) {
         super(props);
-        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleSubmit = this.handleFormSubmit.bind(this)
         this.renderAlert = this.renderAlert.bind(this)
     }
 
-    handleSubmit(e) {
+    handleFormSubmit(e) {
         e.preventDefault()
         const username = this.refs.username.value;
         const password = this.refs.password.value;
@@ -39,6 +39,7 @@ class Login extends React.Component {
                     <div className="col-12">
                         <h1 className="signup-title">Welcome back to ThinkGames!</h1>
                         <div className="demo-info">
+                            <p>Demo Account info:</p>
                             <p className="demo-username">username: dev</p>
                             <p className="demo-password">password: dev</p>
                         </div>
