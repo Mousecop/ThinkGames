@@ -44,7 +44,7 @@ class Home extends React.Component {
                         </div>
                         <div className="col-6">
                             <div className="info-pic">
-                                <img src="https://placeholdit.imgix.net/~text?txtsize=28&bg=0099ff&txtclr=ffffff&txt=300%C3%97300&w=300&h=300" alt="placeholder image" className="img info-img"/>
+                                <img src="https://content.screencast.com/users/j.askew/folders/Jing/media/3e0ab44d-ae33-4529-a344-58a7d16018f0/2017-06-02_1612.png" width="400" height="350" className="info-img"/>
                             </div>
                         </div>
                     </div>
