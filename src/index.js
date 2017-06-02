@@ -20,7 +20,7 @@ ReactDOM.render(
             <IndexRoute component={Home} />
             <Route path='/login' component={Login}/>
             <Route path='/signup' component={Signup} />
-            <Route path='/signout' component={Signout} />
+            <Route path='/signout' component={Home} />
             <Route path='/chat' component={Chat}/>
         </Route>
     </Router>
