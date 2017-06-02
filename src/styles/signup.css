@@ -43,6 +43,10 @@ input:focus {
     margin-bottom: 40px;
 }
 
+#username, #email, #password {
+    background: rgba(0, 0, 0, 0);
+}
+
 .signup-submit-button {
     padding: 20px;
     margin-top: 20px;
