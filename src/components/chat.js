@@ -2,13 +2,17 @@ import React from 'react';
 import io from 'socket.io-client';
 import moment from 'moment';
 import Header from './header'; //eslint-disable-line no-unused-vars
+// import SideBar from './chat-sidebar';
 import { connect } from 'react-redux';
+import '../styles/chat.css';
+import '../styles/grid.css';
 
 class Chat extends React.Component {
   constructor(props){
     super(props);
     this.state = { messages: []}
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.scrollToBottom = this.scrollToBottom.bind(this);
   }
 
   componentDidMount() {
@@ -19,16 +23,23 @@ class Chat extends React.Component {
     this.socket.on('add user', this.props.currentUser)
   }
 
+  scrollToBottom() {
+    const messages = this.refs.messages;
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
   handleSubmit(event) {
     const body = event.target.value;
     if(event.keyCode === 13 && body) {
       const message = {
         body,
-        from: 'me',
+        from: 'Me',
         createdAt: moment().format('MM/D/YYYY hh:mm:ss')
       }
-      console.log('message', message)
-      console.log('current User', this.props.currentUser)
       this.setState({messages: [...this.state.messages, message]})
       this.socket.emit('add user', this.props.currentUser)
       this.socket.emit('message', (body))
@@ -37,15 +48,32 @@ class Chat extends React.Component {
   }
 
   render() {
+    const fromStyle = {
+      color: '#2C8C99',
+      fontSize: '21px'
+    }
+
     const messages = this.state.messages.map((message, index) =>{
-      return <p key={index}>{message.createdAt} <b>{message.from}: </b>{message.body}</p>
-    })
+      return (<div>
+        <p key={index} className="message"><b><span style={fromStyle}>{message.from}</span> </b>{message.createdAt}<br/><br/>
+        <span className="message-body">{message.body}</span></p><hr/></div>
+      )
+    });
+    
     return (
-      <div>
+      <div className="main-container row">
         <Header />
-        <h1>ThinkGames</h1>
-        {messages}
-         <input type="text" placeholder="Enter a message.." onKeyUp={this.handleSubmit} />
+        <div className="col-12">
+          <div className="chat-container ">
+            <h1 className="chat-title">#general</h1>
+            <div className="chat-messages" ref="messages">
+              {messages}
+            </div>
+            <div className="chat-input">
+              <input type="text" placeholder="Enter a message.." onKeyUp={this.handleSubmit} className="message-input" />
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
