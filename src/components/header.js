@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router'; //eslint-disable-line no-unused-vars
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import '../styles/header.css';
+import * as actions from '../actions/action';
 import { LinkContainer } from 'react-router-bootstrap';
 
 
@@ -19,7 +20,7 @@ class Header extends React.Component {
                     <NavItem className="chat-home" eventKey={1}>Chat Room</NavItem>
                 </LinkContainer>,
                 <LinkContainer to='/signout' key={2}>
-                    <NavItem className="signout-button" eventKey={2}>Sign Out</NavItem>
+                    <NavItem className="signout-button" eventKey={2} onClick={this.props.logout}>Sign Out</NavItem>
                 </LinkContainer>
             ]
         }
@@ -59,5 +60,10 @@ class Header extends React.Component {
 const mapStateToProps = state => ({
     isUserLoggedIn : state.isUserLoggedIn
 })
+const mapDispatchToProps = dispatch => ({
+    logout() {
+        dispatch(actions.logoutUser())
+    }
+})
 
-export default connect(mapStateToProps)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
