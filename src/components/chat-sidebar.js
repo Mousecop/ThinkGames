@@ -9,9 +9,11 @@ class Sidebar extends React.Component {
         return (
             <div className="chat-sidebar-container">
                 <div className="sidebar-logo">
-                    <img src="" alt="logo" />
+                    <img src="" alt="logo" className="img-logo"/>
                 </div>
             </div>
         )
     }
 }
+
+export default Sidebar
