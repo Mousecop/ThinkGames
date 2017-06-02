@@ -10,9 +10,11 @@ export class Signout extends React.Component {
 
   render() {
     return (
-      <div className="signoutContainer">
+      <div className="row">
         <Header />
-        <div className="message">come back soon!</div>
+        <div className="signoutContainer">
+          <div className="message">come back soon!</div>
+        </div>
       </div>
     )
   }
