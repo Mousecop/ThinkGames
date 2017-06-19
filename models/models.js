@@ -37,8 +37,8 @@ userSchema.methods.comparePassword = function(candidatePassword, callback) {
 
 
 const messageSchema = mongoose.Schema({
-    fromUser: String,
-    messageContent: String,
+    from: String,
+    body: String,
     createdAt: Date
 });
 
