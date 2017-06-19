@@ -94,8 +94,9 @@ app.get('/api/users', (req, res) => {
 app.get('/api/messages', (req, res) => {
     Messages
         .find({})
+        .limit(15)
         .sort({
-            createdAt: -1
+            createdAt: 'desc'
         })
         .exec()
         .then(listOfMessages => {
@@ -182,13 +183,6 @@ app.post('/api/new/chat-history', (req, res) => {
 io.on('connection', socket =>{
     console.log('user has connected on ' + socket.id);
 
-    // socket.on('connect', () => {
-    //     const messages = db.collection('messages').find({}).sort({
-    //         createdAt: -1
-    //     })
-    //     socket.emit('message', messages)
-    // })
-
     socket.on('add user', username => {
         socket.username = username;
     })
@@ -200,8 +194,8 @@ io.on('connection', socket =>{
     socket.on('message', (body) => {
         console.log('from', socket.username)
         db.collection('messages').insert({
-                fromUser: socket.username,
-                messageContent: body,
+                from: socket.username,
+                body: body,
                 createdAt: Date.now()
             });
             
