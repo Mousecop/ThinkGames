@@ -2,6 +2,14 @@
     box-sizing: border-box;
 }
 
+.appContainer {
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
 body {
     background: rgba(0, 0, 0, .03);
 }
@@ -16,13 +24,27 @@ body {
 .chat-container {
     text-align: center;
     margin-top: 80px;
-    position: relative;
-    height: 900px;
+    margin-right: auto;
+    margin-left: auto;
+    position: absolute;
+    width: 50%;
     border: 1px solid #ddd;
     box-shadow: 0 0 25px rgba(0, 0, 0, .1);
     background: #f7f7f7;
     border-radius: 10px;
+    overflow-y: hidden;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 900px;
+    height: auto;
+}
 
+.chat-container::after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
 }
 
 .chat-messages::-webkit-scrollbar-track
@@ -46,7 +68,10 @@ body {
 
 .chat-messages {
     overflow-y: scroll;
-    height: 86%;
+    height: 87%;
+    position: relative;
+    width: 100%;
+    max-height: inherit;
 }
 
 .message-input {
