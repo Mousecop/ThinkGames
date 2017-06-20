@@ -22,6 +22,8 @@ export default (state = initalState, action) => {
             return {...state, messages: [...state.messages, action.messages]}
         case actions.LOGOUT_USER:
             return {initalState}
+        case actions.NEW_MESSAGE:
+            return {...state, messages: [...state.messages, action.message]}
         default:
             return state
     }
