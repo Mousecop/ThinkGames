@@ -2,7 +2,9 @@ import React from 'react';
 import { Col, Row, Grid } from 'react-bootstrap';
 import Header from './header' //eslint-disable-line no-unused-vars
 import { Link } from 'react-router'; //eslint-disable-line no-unused-vars
-import { LinkContainer } from 'react-router-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap';
+import { connect } from 'react-redux';
+import * as actions from '../actions/action';
 import '../styles/grid.css'
 import '../styles/home.css'
 // import img from '.../public/images/computer-image.jpg'
@@ -10,6 +12,10 @@ import '../styles/home.css'
 class Home extends React.Component {
     constructor(props) {
         super(props)
+    }
+
+    componentDidMount() {
+        this.props.messageHistory()
     }
 
     render() {
@@ -65,4 +71,10 @@ class Home extends React.Component {
     }
 }
 
-export default Home
+const mapDispatchToProps = dispatch => ({
+    messageHistory() {
+        dispatch(actions.fetchMessages())
+    }
+})
+
+export default connect(null, mapDispatchToProps)(Home)
