@@ -6,6 +6,7 @@ export const USER_LOGGED_IN = 'USER_LOGGED_IN';
 export const CURRENT_USER = 'CURRENT_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const LOGOUT_USER = 'LOGOUT_USER';
+export const NEW_MESSAGE = 'NEW_MESSAGE';
 
 import { browserHistory } from 'react-router';
 
@@ -32,6 +33,7 @@ export const fetchMessages = () => dispatch => {
             return response.json();
         })
         .then(messageList => {
+            console.log('messageList', messageList.sort())
             return dispatch(fetchMessagesSuccess(messageList))
         })
 }
@@ -119,4 +121,9 @@ export const authError = (error) => ({
 
 export const logoutUser = () => ({
     type: LOGOUT_USER
+})
+
+export const newMessage = (message) => ({
+    type: NEW_MESSAGE,
+    message
 })
