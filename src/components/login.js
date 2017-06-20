@@ -51,7 +51,7 @@ class Login extends React.Component {
                                 <input type="password" id="password" ref="password" required placeholder="Password"/>
                             </fieldset>
                             {this.renderAlert()}
-                            <button action="submit" className="signup-submit-button">Sign up!</button>
+                            <button action="submit" className="signup-submit-button">Login!</button>
                         </form>
                     </div>
                 </div>
