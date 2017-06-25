@@ -32,7 +32,7 @@
 }
 
 .about-section {
-    height: 500px;
+    height: 540px;
     padding-top: 30px;
     border-bottom: 1px solid #000;
 }
@@ -81,6 +81,9 @@
 }
 
 .signup-link:hover {
+    appearance: button;
+    -moz-appearance: button;
+    -webkit-appearance: button;
     text-decoration: none;
     background-color: #1b5861;
     color: #FFF;
