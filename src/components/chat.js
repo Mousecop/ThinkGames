@@ -47,7 +47,6 @@ class Chat extends React.Component {
       this.setState({messages: [...this.state.messages, message]})
       this.socket.emit('message', (body))
       this.props.newMessage(message)
-      console.log('Props user', this.props.currentUser)
       event.target.value = '';
     }
   }

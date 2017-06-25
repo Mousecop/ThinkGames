@@ -9,7 +9,6 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'; //esli
 import Home from './components/home';
 import Login from './components/login';
 import Signup from './components/signup';
-import Signout from './components/signout';
 import Chat from './components/chat';
 
 

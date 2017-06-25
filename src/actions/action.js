@@ -33,13 +33,11 @@ export const fetchMessages = () => dispatch => {
             return response.json();
         })
         .then(messageList => {
-            console.log('messageList', messageList.sort())
             return dispatch(fetchMessagesSuccess(messageList))
         })
 }
 
 export const signupUser = userInfo => dispatch => {
-    console.log(userInfo)
     fetch('/api/users/signup', {
         method: 'POST',
         headers: {
@@ -59,7 +57,6 @@ export const signupUser = userInfo => dispatch => {
 }
 
 export const signinUser = (userInfo) => dispatch => {
-    console.log('userinfo', userInfo)
     fetch('/api/users/signin', {
         method: 'POST',
         headers: {
@@ -79,7 +76,6 @@ export const signinUser = (userInfo) => dispatch => {
         }
     })
     .catch(err => {
-        console.log('signin error:',err);
         dispatch(authError('Bad login info'))
     })
 }
