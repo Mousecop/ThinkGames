@@ -1,7 +1,7 @@
 <h1>ThinkGames</h1>
 <p><a href="https://thinkgames.herokuapp.com">ThinkGames</a> is the place for people to talk about anything game related. From League of Legends to Dungeon and Dragons. It is all welcome here! So come on by and have fun chatting in real time with your friends or make some new ones! GL HF!</p>
 
-<img src="public/images/thinkgmaes-collage.jpg" />
+<img src="public/images/thinkgames-collage.jpg" />
 
 ## Getting started
 
