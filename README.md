@@ -29,6 +29,8 @@ Then open [http://localhost:3000](http://localhost:3000) in a browser.
 <h3>Create an account</h3>
 <p>Users can go to the signup page to create their very own profile. All information is stored in a database, and the passwords are encrypted, so users can feel safe with siging up!</p>
 
+<h3>Start chatting</h3>
+<p>After logging in, users are free to start chatting away! When users leave and come back, they will see old messages still there, too!</p>
 
 <h2>Wire Frames</h2>
 <p>All wire frames were made with <a href="https://wireframe.cc/">WireFrame.cc</a>.</p>
