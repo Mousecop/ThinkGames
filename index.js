@@ -12,7 +12,7 @@ const DATABASE_URL = 'mongodb://dev:dev@ds157621.mlab.com:57621/thinkgames-db';
 const moment = require('moment');
 const auth = require('./controllers/authentication');
 const passport = require('passport');
-const cors = require('cors')
+const cors = require('cors');
 const LocalStrategy = require('passport-local').Strategy;
 
 mongoose.Promise = global.Promise;
