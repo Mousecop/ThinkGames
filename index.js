@@ -109,6 +109,7 @@ app.get('/api/messages', (req, res) => {
         })
 })
 
+//Not currently being used, but added for future use
 app.get('/api/user/:username', (req, res) => {
     User
         .find({
@@ -124,6 +125,7 @@ app.get('/api/user/:username', (req, res) => {
         })
 })
 
+//HTTP requests for login and Signup
 app.post('/api/users/signup', auth.signup)
 app.post('/api/users/signin', (req, res, next) => {
     passport.authenticate('local', {session: false}, function(err, user, info) {
