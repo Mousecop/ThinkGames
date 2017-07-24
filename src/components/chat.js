@@ -1,4 +1,5 @@
-import React from 'react';
+// @flow
+import React, { Component } from 'react';
 import io from 'socket.io-client';
 import moment from 'moment';
 import Header from './header'; //eslint-disable-line no-unused-vars
@@ -8,7 +9,11 @@ import * as actions from '../actions/action';
 import '../styles/chat.css';
 import '../styles/grid.css';
 
-class Chat extends React.Component {
+class Chat extends Component {
+  state: {
+    messages: Array<string>
+  };
+  
   constructor(props){
     super(props);
     this.state = { messages: []}
